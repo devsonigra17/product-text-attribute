@@ -1,0 +1,30 @@
+<?php
+    $object_Manager = \Magento\Framework\App\ObjectManager::getInstance();
+    $product = $object_Manager->get('Magento\Framework\Registry')->registry('current_product');//get current product
+    $productId = $product->getData('entity_id');
+    $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+    $products = $objectManager->create('Magento\Catalog\Model\Product')->load($productId);
+    $myCustomAttrVal = $products->getData('text_att');
+?>
+<?php
+    if($myCustomAttrVal !=NULL)
+    {
+?>
+    <div class="text_att">
+        <span class="label">Text Attribute Value: </span>
+        <span class="value"><?php echo $myCustomAttrVal; ?></span>
+    </div>
+<?php
+    }
+?>
+<style>
+    span.label{
+        font-weight: bold;
+        font-size: large;
+    }
+    span.value{
+        font-size:large;
+        color: #666666;
+        margin-left:4px;
+    }
+</style>
